@@ -1,22 +1,22 @@
-import { Link, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styles from "./NavBar.module.scss";
 
 export const NavBar = () => {
-  const location = useLocation();
+  const active = styles.active;
 
   return (
     <div className={styles.navbar}>
-      <Link to={"/"}>
-        <button>Characters</button>{" "}
-      </Link>
+      <NavLink to="/" className={({ isActive }) => (isActive ? active : undefined)}>
+        Characters
+      </NavLink>
 
-      <Link to={"/episodes/1"}>
-        <button>Episodes</button>
-      </Link>
+      <NavLink to="/episodes/1" className={({ isActive }) => (isActive ? active : undefined)}>
+        Episodes
+      </NavLink>
 
-      <Link to={"/location/1"}>
-        <button>Location</button>
-      </Link>
+      <NavLink to="/location/1" className={({ isActive }) => (isActive ? active : undefined)}>
+        Location
+      </NavLink>
     </div>
   );
 };

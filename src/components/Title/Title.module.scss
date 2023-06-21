@@ -1,0 +1,25 @@
+.title {
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    margin: auto;
+  }
+
+  .episode {
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: rgb(73, 98, 210);
+    color: white;
+  }
+
+  span {
+    color: rgb(73, 98, 210);
+  }
+}

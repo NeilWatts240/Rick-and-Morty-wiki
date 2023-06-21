@@ -4,7 +4,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #fafcfd;
-  padding: 10px;
 }
 
 a,
@@ -15,24 +14,25 @@ a:active {
   text-decoration: none;
 }
 
-.header {
-  max-width: 1200px;
-  margin: auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 50px;
-  width: 100%;
-  padding-bottom: 20px;
-}
-
 .home {
   max-width: 1200px;
   margin: auto;
   display: flex;
+
+  .Home-content {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
 
 .sort {
+  @media (max-width: 768px) {
+    width: 30%;
+    margin-right: 20px;
+    padding-left: 5px;
+    padding-right: 0;
+  }
   width: 20%;
   padding: 10px;
 }
@@ -41,22 +41,23 @@ a:active {
   margin: 50px;
 }
 
-.Home-content {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-}
-
 .ant-collapse-header {
-  background-color: rgb(171, 171, 171);
+  &:hover {
+    background-color: rgb(73, 98, 210);
+    color: white;
+  }
+  color: rgb(73, 98, 210);
 }
 
 .ant-collapse-header-text {
-  color: white;
+  color: rgb(73, 98, 210);
+  &:hover {
+    color: white;
+  }
 }
 
 .ant-collapse-arrow {
-  color: white;
+  opacity: 0;
 }
 
 .ant-collapse-content-box {
@@ -65,11 +66,14 @@ a:active {
   align-items: center;
 
   button {
+    &:hover {
+      background-color: rgb(73, 98, 210);
+      color: white;
+    }
     cursor: pointer;
     border-radius: 5px;
-    background-color: rgb(171, 171, 171);
-    color: white;
-    border: none;
+    color: rgb(73, 98, 210);
+    border: 1px solid rgb(73, 98, 210);
     height: 30px;
     margin: 5px;
     width: 80%;
@@ -77,24 +81,34 @@ a:active {
 }
 
 .clear-button {
+  &:hover {
+    background-color: rgb(73, 98, 210);
+    color: white;
+  }
   cursor: pointer;
-  background-color: rgb(171, 171, 171);
-  color: white;
+  color: rgb(73, 98, 210);
   border-radius: 5px;
-  border: none;
+  border: 1px solid rgba(73, 98, 210, 0.139);
   height: 30px;
   margin-top: 10px;
   width: 100%;
 }
 
 .fullcard-container {
-  max-width: 800px;
+  max-width: 1200px;
   margin: auto;
-  padding: 20px;
 
   .fullcard-flex {
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
     display: flex;
+    justify-content: center;
     margin: auto;
+
+    img {
+      padding-bottom: 10px;
+    }
   }
 
   .fullcard-item {
@@ -103,27 +117,37 @@ a:active {
   }
 
   .div-link {
-    color: white;
-    background-color: rgb(177, 179, 236);
+    span {
+      color: rgb(73, 98, 210);
+      font-weight: 600;
+      margin-left: 10px;
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-bottom: 3px;
+      background-color: rgba(73, 98, 210, 0.103);
+      border-radius: 20px;
 
-    &:hover {
-      background-color: rgb(166, 169, 234);
+      &:hover {
+        background-color: rgba(73, 98, 210, 0.746);
+        color: white;
+      }
     }
   }
 
   .fullcard-button {
+    font-size: 16px;
     display: block;
     cursor: pointer;
-    background-color: rgb(177, 179, 236);
+    background-color: rgb(73, 98, 210, 0.8);
     color: white;
     border: none;
     margin-top: 10px;
     padding: 5px;
-    border-radius: 5px;
-    width: 100px;
+    border-radius: 10px;
+    width: 150px;
 
     &:hover {
-      background-color: rgb(166, 169, 234);
+      background-color: rgb(73, 98, 210);
     }
   }
 }

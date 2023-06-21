@@ -3,17 +3,20 @@ import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Header } from "../components/Header";
 import { FullCardWrapper } from "./style";
-import { Collapse } from "antd";
 import { EpisodeItem } from "../components/EpisodeItem/Index";
-const { Panel } = Collapse;
 
 export const FullCard = () => {
   const [card, setCard] = React.useState([]);
+  const [locationID, setLocationID] = React.useState();
+  const [originID, setOriginID] = React.useState();
   const { name, status, species, type, image, gender, episode, location, origin } = card;
   const [episodes, setEpisodes] = React.useState([]);
   const [isOpen, setIsOpen] = React.useState(false);
+  const [idd, setIdd] = React.useState();
   const { id } = useParams();
   const navigate = useNavigate();
+
+  console.log(card);
 
   React.useEffect(() => {
     async function fetchCard() {
@@ -33,6 +36,17 @@ export const FullCard = () => {
       const { data } = await axios.get(item);
       setEpisodes((prev) => [...prev, data]);
     });
+    async function fetchLocationID() {
+      const { data } = await axios.get(location.url);
+      setLocationID(data.id);
+    }
+    async function fetchOriginID() {
+      const { data } = await axios.get(origin.url);
+      setOriginID(data.id);
+    }
+
+    fetchOriginID();
+    fetchLocationID();
   }, [card]);
 
   if (!card) {
@@ -52,19 +66,25 @@ export const FullCard = () => {
             </div>
             <div className="fullcard-item">Gender: {gender}</div>
             <div className="fullcard-item">Species: {species}</div>
-            {type && <div>Type: {type}</div>}
+            {type && <div className="fullcard-item">Type: {type}</div>}
             {location && (
-              <Link to={location.url}>
-                <div className="fullcard-item div-link">Location: {location.name}</div>
-              </Link>
+              <div className="fullcard-item div-link">
+                Location :
+                <Link to={`/location/${locationID}`}>
+                  <span>{location.name}</span>
+                </Link>
+              </div>
             )}
             {origin && (
-              <Link to={origin.url}>
-                <div className="fullcard-item div-link">Origin: {origin.name}</div>
-              </Link>
+              <div className="fullcard-item div-link">
+                Origin :
+                <Link to={`/location/${originID}`}>
+                  <span>{origin.name}</span>
+                </Link>
+              </div>
             )}
             <button className="fullcard-button" onClick={() => setIsOpen((isOpen) => !isOpen)}>
-              show episodes
+              Show episodes
             </button>
             <Link to="/">
               <button className="fullcard-button">Back</button>

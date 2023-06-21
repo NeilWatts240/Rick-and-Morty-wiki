@@ -1,3 +1,4 @@
+import styles from "./Sort.module.scss";
 import { Collapse } from "antd";
 const { Panel } = Collapse;
 

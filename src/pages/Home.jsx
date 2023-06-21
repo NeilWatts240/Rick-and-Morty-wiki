@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Skeleton } from "../components/Card/Skeleton";
 import { Sort } from "../components/Sort";
 import { Pagination } from "../components/Pagination";
 import { Card } from "../components/Card";
@@ -14,7 +13,6 @@ export const Home = () => {
   const [species, setSpecies] = useState("");
   const [info, setInfo] = useState("");
   const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   const onChangePage = (page) => {
     setCurrentPage(page);
@@ -26,7 +24,6 @@ export const Home = () => {
         const { data } = await axios.get(
           `https://rickandmortyapi.com/api/character/?page=${currentPage}&name=${searchValue}&status=${status}&gender=${gender}&species=${species}`
         );
-        setLoading(false);
         setItems(data.results);
         setInfo(data.info);
       } catch (error) {
@@ -35,8 +32,6 @@ export const Home = () => {
     };
     fetch();
   }, [currentPage, searchValue, status, gender, species]);
-
-  const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index} />);
 
   return (
     <>
