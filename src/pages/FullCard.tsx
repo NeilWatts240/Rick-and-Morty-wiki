@@ -118,7 +118,7 @@ export const FullCard: React.FC = () => {
             <button className="fullcard-button" onClick={() => setIsOpen((isOpen) => !isOpen)}>
               Show episodes
             </button>
-            <Link to="/">
+            <Link to="/episodes/1">
               <button className="fullcard-button">Back</button>
             </Link>
           </FullCardWrapper>
