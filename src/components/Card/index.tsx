@@ -1,7 +1,14 @@
 import { Link } from "react-router-dom";
-import { CardWrapper } from "./style.js";
+import { CardWrapper } from "./style";
 
-export const Card = ({ id, name, image, status }) => {
+type CardPropsType = {
+  id: number;
+  name: string;
+  image: string;
+  status: string;
+};
+
+export const Card: React.FC<CardPropsType> = ({ id, name, image, status }) => {
   return (
     <CardWrapper>
       <div className={`status-${status}`}>{status}</div>

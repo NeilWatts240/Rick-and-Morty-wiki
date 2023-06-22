@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import styles from "./EpisodeItem.module.scss";
+import { EpisodeType } from "../../@types/types";
 
-export const EpisodeItem = ({ episodes }) => {
+type EpisodeItemPropsType = { episodes: EpisodeType[] };
+
+export const EpisodeItem: React.FC<EpisodeItemPropsType> = ({ episodes }) => {
   return (
     <div className={styles.episodes}>
       {episodes.map((item, index) => (

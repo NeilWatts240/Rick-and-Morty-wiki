@@ -1,48 +1,80 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Header } from "../components/Header";
 import { FullCardWrapper } from "./style";
 import { EpisodeItem } from "../components/EpisodeItem/Index";
+import { EpisodeType } from "../@types/types";
 
-export const FullCard = () => {
-  const [card, setCard] = React.useState([]);
-  const [locationID, setLocationID] = React.useState();
-  const [originID, setOriginID] = React.useState();
+const cardType = {
+  created: "",
+  episode: [],
+  gender: "",
+  id: 1,
+  image: "",
+  location: {
+    name: "",
+    url: "",
+  },
+  name: "",
+  origin: {
+    name: "",
+    url: "",
+  },
+  species: "",
+  status: "",
+  type: "",
+  url: "",
+};
+
+export const FullCard: React.FC = () => {
+  const [card, setCard] = useState(cardType);
+  const [locationID, setLocationID] = useState();
+  const [originID, setOriginID] = useState();
   const { name, status, species, type, image, gender, episode, location, origin } = card;
-  const [episodes, setEpisodes] = React.useState([]);
-  const [isOpen, setIsOpen] = React.useState(false);
-  const [idd, setIdd] = React.useState();
+  const [episodes, setEpisodes] = useState<EpisodeType[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
 
-  console.log(card);
-
-  React.useEffect(() => {
+  useEffect(() => {
     async function fetchCard() {
       try {
         const { data } = await axios.get(`https://rickandmortyapi.com/api/character/${id}`);
         setCard(data);
       } catch (error) {
         alert("Error");
+        console.log(error);
         navigate("/");
       }
     }
     fetchCard();
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     episode?.map(async (item) => {
       const { data } = await axios.get(item);
       setEpisodes((prev) => [...prev, data]);
     });
+  }, [card]);
+
+  useEffect(() => {
     async function fetchLocationID() {
-      const { data } = await axios.get(location.url);
-      setLocationID(data.id);
+      try {
+        const { data } = await axios.get(location.url);
+        setLocationID(data.id);
+      } catch (error) {
+        console.log(error);
+      }
     }
+
     async function fetchOriginID() {
-      const { data } = await axios.get(origin.url);
-      setOriginID(data.id);
+      try {
+        const { data } = await axios.get(origin.url);
+        setOriginID(data.id);
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     fetchOriginID();

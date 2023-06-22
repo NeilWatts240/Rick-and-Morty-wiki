@@ -2,7 +2,13 @@ import styles from "./Sort.module.scss";
 import { Collapse } from "antd";
 const { Panel } = Collapse;
 
-export const Sort = ({ setStatus, setGender, setSpecies }) => {
+type SortPropsType = {
+  setStatus: (value: string) => void;
+  setGender: (value: string) => void;
+  setSpecies: (value: string) => void;
+};
+
+export const Sort: React.FC<SortPropsType> = ({ setStatus, setGender, setSpecies }) => {
   const statusArray = ["Alive", "Dead", "Unknown"];
   const speciesArray = ["Human", "Alien", "Poopybutthole", "Mythological", "Unknown", "Animal", "Disease", "Robot", "Cronenberg", "Planet"];
   const genderArray = ["Female", "Male", "Genderless", "Unknown"];
@@ -14,7 +20,7 @@ export const Sort = ({ setStatus, setGender, setSpecies }) => {
   };
 
   return (
-    <div className="sort">
+    <div className={styles.sort}>
       <Collapse accordion>
         <Panel header="Status" key="1">
           {statusArray.map((item, index) => (

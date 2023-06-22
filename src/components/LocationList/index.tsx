@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import styles from "./LocationList.module.scss";
+import { LocationType } from "../../@types/types";
 
-export const LocationList = ({ locations }) => {
+type LocationTypeProps = { locations: LocationType[] };
+
+export const LocationList: React.FC<LocationTypeProps> = ({ locations }) => {
   return (
     <div className={styles.locationList}>
       <h2>Pick location</h2>

@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import styles from "./NavBar.module.scss";
 
-export const NavBar = () => {
+export const NavBar: React.FC = () => {
   const active = styles.active;
 
   return (

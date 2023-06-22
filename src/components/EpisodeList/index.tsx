@@ -1,7 +1,13 @@
 import { Link } from "react-router-dom";
 import styles from "./EpisodeList.module.scss";
+import React from "react";
+import { EpisodeType } from "../../@types/types";
 
-export const EpisodeList = ({ episodes }) => {
+type EpisodeListPropsType = {
+  episodes: EpisodeType[];
+};
+
+export const EpisodeList: React.FC<EpisodeListPropsType> = ({ episodes }) => {
   return (
     <div className={styles.episodesList}>
       <h2>Pick episode</h2>

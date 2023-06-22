@@ -3,7 +3,11 @@ import { Link, useLocation } from "react-router-dom";
 import { Search } from "../Search";
 import { NavBar } from "../NavBar";
 
-export const Header = ({ setSearchValue }) => {
+type HeaderPropsType = {
+  setSearchValue?: (value: string) => void;
+};
+
+export const Header: React.FC<HeaderPropsType> = ({ setSearchValue }) => {
   const location = useLocation();
 
   return (

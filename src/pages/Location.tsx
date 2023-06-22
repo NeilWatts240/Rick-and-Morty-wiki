@@ -1,24 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-
 import { Header } from "../components/Header";
 import { Title } from "../components/Title";
 import { Card } from "../components/Card";
 import { LocationList } from "../components/LocationList";
+import { LocationType, CharacterType } from "../@types/types";
 
-export const Location = () => {
-  const [data, setData] = React.useState([]);
-  const [locations, setLocations] = React.useState([]);
-  const [residents, setResidents] = React.useState([]);
-  const [characters, setCharacters] = React.useState([]);
+const locationType = {
+  id: "",
+  name: "",
+  type: "",
+  dimension: "",
+  residents: [],
+  url: "",
+  created: "",
+  air_date: "",
+  episode: "",
+};
+
+export const Location: React.FC = () => {
+  const [data, setData] = useState(locationType);
+  const [locations, setLocations] = useState<LocationType[]>([]);
+  const [residents, setResidents] = useState([]);
+  const [characters, setCharacters] = useState<CharacterType[]>([]);
   const { id } = useParams();
 
-  React.useEffect(() => {
-    async function fetch(link) {
+  useEffect(() => {
+    async function fetch(link: string) {
       try {
         const { data } = await axios.get(link);
-        data.results.map((item) => {
+        data.results.map((item: LocationType) => {
           setLocations((prev) => [...prev, item]);
         });
       } catch (error) {
@@ -35,12 +47,11 @@ export const Location = () => {
     fetch("https://rickandmortyapi.com/api/location?page=7");
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     async function fetch() {
       try {
         const { data } = await axios.get(`https://rickandmortyapi.com/api/location/${id}`);
         setData(data);
-        console.log(data);
         setResidents(data.residents);
       } catch (error) {
         alert("Error");
@@ -49,7 +60,7 @@ export const Location = () => {
     fetch();
   }, [id]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setCharacters([]);
     async function fetch() {
       residents.map(async (item) => {

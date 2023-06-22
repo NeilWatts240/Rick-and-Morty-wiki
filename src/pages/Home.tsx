@@ -4,17 +4,25 @@ import { Sort } from "../components/Sort";
 import { Pagination } from "../components/Pagination";
 import { Card } from "../components/Card";
 import { Header } from "../components/Header";
+import { CharacterType } from "../@types/types";
 
-export const Home = () => {
-  const [currentPage, setCurrentPage] = useState("");
-  const [searchValue, setSearchValue] = useState("");
+const infoType = {
+  count: 1,
+  next: "",
+  pages: 1,
+  prev: "",
+};
+
+export const Home: React.FC = () => {
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [searchValue, setSearchValue] = useState<string>("");
   const [status, setStatus] = useState("");
   const [gender, setGender] = useState("");
   const [species, setSpecies] = useState("");
-  const [info, setInfo] = useState("");
-  const [items, setItems] = useState([]);
+  const [info, setInfo] = useState(infoType);
+  const [characters, setCharacters] = useState<CharacterType[]>([]);
 
-  const onChangePage = (page) => {
+  const onChangePage = (page: number) => {
     setCurrentPage(page);
   };
 
@@ -24,7 +32,7 @@ export const Home = () => {
         const { data } = await axios.get(
           `https://rickandmortyapi.com/api/character/?page=${currentPage}&name=${searchValue}&status=${status}&gender=${gender}&species=${species}`
         );
-        setItems(data.results);
+        setCharacters(data.results);
         setInfo(data.info);
       } catch (error) {
         console.log(error);
@@ -39,7 +47,7 @@ export const Home = () => {
       <div className="home">
         <Sort setStatus={setStatus} setGender={setGender} setSpecies={setSpecies} />
         <div className="Home-content">
-          {items.map((obj) => (
+          {characters.map((obj) => (
             <Card key={obj.id} {...obj} />
           ))}
         </div>

@@ -1,6 +1,21 @@
+import React from "react";
 import styles from "./Title.module.scss";
 
-export const Title = ({ data }) => {
+type TitlePropsType = {
+  data: {
+    id: string;
+    name: string;
+    type: string;
+    dimension: string;
+    residents: string[];
+    url: string;
+    created: string;
+    air_date: string;
+    episode: string;
+  };
+};
+
+export const Title: React.FC<TitlePropsType> = ({ data }) => {
   return (
     <div className={styles.title}>
       {data.episode && (
